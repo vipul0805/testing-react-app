@@ -35,6 +35,10 @@
       "text",
       "clover",
       "cobertura"
+    ],
+    "setupTestFrameworkScriptFile": "./setupTests.js",
+    "testMatch": [
+      "**/*.test.js"
     ]
   },
   "eslintConfig": {
