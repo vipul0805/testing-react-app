@@ -5,7 +5,6 @@ pipeline {
 	steps {
               withSonarQubeEnv('sonarqube') {
                 bat "npm install"
-                bat "set CI=true&&npm run coverage:prod -u"
                 bat "sonar-scanner"
               }
            }
