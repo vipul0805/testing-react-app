@@ -36,9 +36,6 @@
       "text",
       "clover",
       "cobertura"
-    ],
-    "testMatch": [
-      "<rootDir>/src/**/*.test.js"
     ]
   },
   "eslintConfig": {
