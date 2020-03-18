@@ -25,7 +25,6 @@
       "**/*.{js,jsx}",
       "!coverage/**",
       "!node_modules/**",
-      "!src/index.js",
       "!public/**",
       "!build/**"
     ],
