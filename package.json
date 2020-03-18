@@ -25,6 +25,7 @@
       "**/*.{js,jsx}",
       "!coverage/**",
       "!node_modules/**",
+      "!src/index.js",
       "!public/**",
       "!build/**"
     ],
@@ -36,9 +37,8 @@
       "clover",
       "cobertura"
     ],
-    "setupTestFrameworkScriptFile": "./setupTests.js",
     "testMatch": [
-      "**/*.test.js"
+      "<rootDir>/src/**/*.test.js"
     ]
   },
   "eslintConfig": {
