@@ -17,7 +17,8 @@
     "postbuild": "rimraf build/**/*.map",
     "test": "react-scripts test",
     "coverage:dev": "react-scripts test --coverage --watchAll",
-    "coverage:prod": "CI=true && react-scripts test --coverage",
+    "coverage:prod": "cross-env CI=true react-scripts test --coverage",
+    "coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
