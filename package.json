@@ -15,29 +15,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "postbuild": "rimraf build/**/*.map",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
     "coverage:dev": "react-scripts test --coverage --watchAll",
     "coverage:prod": "react-scripts test --coverage",
     "eject": "react-scripts eject"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "**/*.{js,jsx}",
-      "!src/index.js",
-      "!src/setupTests.js",
-      "!coverage/**",
-      "!node_modules/**",
-      "!public/**",
-      "!build/**"
-    ],
-    "coverageReporters": [
-      "text",
-      "lcov",
-      "json",
-      "text",
-      "clover",
-      "cobertura"
-    ]
   },
   "eslintConfig": {
     "extends": "react-app"
