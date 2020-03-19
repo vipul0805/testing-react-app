@@ -5,7 +5,7 @@ pipeline {
 	steps {
           sh "npm install"
 				  sh "ls"
-          sh "set CI=true  && npm run coverage:prod -u"
+          sh "CI=true && sudo npm run coverage:prod -u"
             }
           }
         }
