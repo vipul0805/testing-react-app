@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-class Postform extends Component {
+export default class Postform extends Component {
   constructor(props) {
     super(props);
 
@@ -58,5 +58,3 @@ class Postform extends Component {
     );
   }
 }
-
-export default Postform;

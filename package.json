@@ -23,6 +23,8 @@
   "jest": {
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
+      "!src/index.js",
+      "!src/setupTests.js",
       "!coverage/**",
       "!node_modules/**",
       "!public/**",
