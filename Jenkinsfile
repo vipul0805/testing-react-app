@@ -1,13 +1,21 @@
 pipeline {
-    agent any
-    tools {nodejs "node"}
+  
+  agent any
+  tools {nodejs "node"}
     stages {
-	stage('Sonar Analysis') {
-	steps {
-          sh "npm install"
-				  sh "ls"
-          sh "npm run coverage"
-            }
+	  stage('Testing') {
+	    steps {
+        sh "npm install"
+        sh "npm run coverage"
           }
         }
+
+    stage("Sonar Analysis"){
+      steps{
+        withSonarQubeEnv('sonarqube') {
+          sh "sonar scanner"
+          }
+      }
+    }
+  }
 }
