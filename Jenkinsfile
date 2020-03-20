@@ -6,7 +6,7 @@ pipeline {
 	steps {
           sh "npm install"
 				  sh "ls"
-          sh "sudo npm run coverage"
+          sh "npm run coverage"
             }
           }
         }
