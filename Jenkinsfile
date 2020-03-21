@@ -7,6 +7,7 @@ pipeline {
 	    steps {
         sh "npm install"
         sh "npm install forever -g"
+        sh "npm install lighthouse -g"
         sh "npm run coverage"
           }
         }
@@ -33,7 +34,8 @@ pipeline {
     stage('Performance Tests') {
   steps {
      sh "forever start -c 'npm start' ./"
-     sh label: 'Test running', script: '''npx lighthouse-ci http://172.17.0.2:3000/ --jsonReport --report=.'''
+     sh "npm run lighthouse http://172.17.0.2:3000"
+     //sh label: 'Test running', script: '''npx lighthouse-ci http://172.17.0.2:3000/ --jsonReport --report=.'''
      sh "forever stop 0" 
   }
   post {
