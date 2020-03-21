@@ -32,9 +32,8 @@ pipeline {
         }
     stage('Performance Tests') {
   steps {
-    deleteDir()
-    checkout scm
-     bat label: 'Test running', script: '''npx lighthouse-ci http://localhost:3000/ --jsonReport --report=.'''
+    sh "forever start -c 'npm start' ./"
+     sh label: 'Test running', script: '''npx lighthouse-ci http://172.17.0.2:3000/ --jsonReport --report=.'''
   }
   post {
     always {
