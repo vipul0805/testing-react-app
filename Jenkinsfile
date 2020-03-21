@@ -6,6 +6,7 @@ pipeline {
 	  stage('Testing') {
 	    steps {
         sh "npm install"
+        sh "npm install forever -g"
         sh "npm run coverage"
           }
         }
