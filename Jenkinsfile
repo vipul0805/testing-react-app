@@ -35,7 +35,7 @@ pipeline {
   steps {
      sh "forever start -c 'npm start' ./"
      sh "npm run lighthouse http://172.17.0.2:3000"
-     //sh label: 'Test running', script: '''npx lighthouse-ci http://172.17.0.2:3000/ --jsonReport --report=.'''
+     /*sh label: 'Test running', script: '''npx lighthouse-ci http://172.17.0.2:3000/ --jsonReport --report=.'''*/
      sh "forever stop 0" 
   }
   post {
