@@ -7,7 +7,6 @@ pipeline {
 	    steps {
         sh "npm install"
         sh "npm run coverage"
-        sh "npm start"
           }
         }
 
