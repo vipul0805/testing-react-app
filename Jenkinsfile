@@ -38,8 +38,7 @@ pipeline {
     }
     stage("push Image to Registery"){
       steps{
-        sh '''docker build -t 172.31.36.199:5000/react-app:latest .
-               docker push 172.31.36.199:5000/react-app:latest
+        sh '''docker push 172.31.36.199:5000/react-app:latest
                docker rmi 172.31.36.199:5000/react-app:latest
             '''
       }
