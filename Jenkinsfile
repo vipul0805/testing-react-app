@@ -9,9 +9,6 @@ pipeline {
         sh "npm install forever -g"
         sh "npm install lighthouse -g"
         sh "npm run coverage"
-        sh "forever start -c 'npm start' ./"
-        sh "forever logs 0"
-        sh "forever stop 0"
           }
         }
 
@@ -47,26 +44,26 @@ pipeline {
     //   }
     // }
 
-//     stage('Performance Tests') {
-//     steps {
-//      sh "forever start -c 'npm start' ./"
-//      sh "npm run lighthouse http://172.17.0.2:3000"
-//      //sh label: 'Test running', script: '''npx lighthouse-ci http://172.17.0.2:3000/ --jsonReport --report=.'''
-//      sh "forever stop 0" 
-//   }
-//   post {
-//     always {
-//       publishHTML (target: [
-//         allowMissing: false,
-//         alwaysLinkToLastBuild: false,
-//         keepAll: true,
-//         reportDir: '.',
-//         reportFiles: 'report.html',
-//         reportName: "Lighthouse"
-//       ])
-//     }
-//   }
-// }
+    stage('Performance Tests') {
+    steps {
+     sh "forever start -c 'npm start' ./"
+     sh "npm run lighthouse http://172.17.0.2:3000"
+     //sh label: 'Test running', script: '''npx lighthouse-ci http://172.17.0.2:3000/ --jsonReport --report=.'''
+     sh "forever stop 0" 
+  }
+  post {
+    always {
+      publishHTML (target: [
+        allowMissing: false,
+        alwaysLinkToLastBuild: false,
+        keepAll: true,
+        reportDir: '.',
+        reportFiles: 'report.html',
+        reportName: "Lighthouse"
+      ])
+    }
+  }
+}
       
   }
 }
