@@ -22,15 +22,15 @@ pipeline {
           }
       }
     }
-    stage("Quality Gate") {
-            steps {
-                timeout(time: 1, unit: 'HOURS') {
-                    // Parameter indicates whether to set pipeline UNSTABLE if Quality Gate fails
-                    // true = set pipeline to UNSTABLE, false = dont
-                    waitForQualityGate abortPipeline: false
-                }
-            }
-        }
+    // stage("Quality Gate") {
+    //         steps {
+    //             timeout(time: 1, unit: 'HOURS') {
+    //                 // Parameter indicates whether to set pipeline UNSTABLE if Quality Gate fails
+    //                 // true = set pipeline to UNSTABLE, false = dont
+    //                 waitForQualityGate abortPipeline: false
+    //             }
+    //         }
+    //     }
     stage('Build Docker Image'){
       steps{
       sh 'docker build -t 172.31.36.199:5000/react-app:latest --no-cache . '
