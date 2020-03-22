@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
     "eject": "react-scripts eject",
-    "lighthouse": "node ./node_modules/lighthouse/lighthouse-cli/index.js --output-path=./report.html --quiet --chrome-flags='--headless' "
+    "lighthouse": "node ./node_modules/lighthouse/lighthouse-cli/index.js --output-path=./report.html --quiet --chrome-flags='--headless --disable-gpu --no-sandbox' "
   },
   "eslintConfig": {
     "extends": "react-app"
