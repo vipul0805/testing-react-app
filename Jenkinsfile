@@ -10,6 +10,8 @@ pipeline {
         sh "npm install lighthouse -g"
         sh "npm run coverage"
         sh "forever start -c 'npm start' ./"
+        sh "forever logs 0"
+        sh "forever stop 0"
           }
         }
 
