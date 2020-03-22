@@ -6,7 +6,6 @@ pipeline {
 	  stage('Testing') {
 	    steps {
         sh "npm install"
-        sh "npm start"
         sh "npm install forever -g"
         sh "npm install lighthouse -g"
         sh "npm run coverage"
