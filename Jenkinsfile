@@ -27,7 +27,7 @@ pipeline {
                 timeout(time: 1, unit: 'HOURS') {
                     // Parameter indicates whether to set pipeline UNSTABLE if Quality Gate fails
                     // true = set pipeline to UNSTABLE, false = dont
-                    waitForQualityGate abortPipeline: true
+                    waitForQualityGate abortPipeline: false
                 }
             }
         }
