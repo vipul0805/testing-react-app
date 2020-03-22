@@ -5,7 +5,6 @@ pipeline {
     stages {
 	  stage('Testing') {
 	    steps {
-        deleteDir()
         sh "npm install"
         sh "npm start"
         sh "npm install forever -g"
