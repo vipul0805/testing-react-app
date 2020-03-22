@@ -12,25 +12,25 @@ pipeline {
           }
         }
 
-    stage("Sonar Analysis"){
-      steps{
-        script {
-                scannerhome = tool 'sonarqube';
-            }
-        withSonarQubeEnv('sonar') {
-          sh "${scannerhome}/bin/sonar-scanner -D sonar.login=admin -D sonar.password=admin"
-          }
-      }
-    }
-    stage("Quality Gate") {
-            steps {
-                timeout(time: 1, unit: 'HOURS') {
-                    // Parameter indicates whether to set pipeline UNSTABLE if Quality Gate fails
-                    // true = set pipeline to UNSTABLE, false = dont
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
+    // stage("Sonar Analysis"){
+    //   steps{
+    //     script {
+    //             scannerhome = tool 'sonarqube';
+    //         }
+    //     withSonarQubeEnv('sonar') {
+    //       sh "${scannerhome}/bin/sonar-scanner -D sonar.login=admin -D sonar.password=admin"
+    //       }
+    //   }
+    // }
+    // stage("Quality Gate") {
+    //         steps {
+    //             timeout(time: 1, unit: 'HOURS') {
+    //                 // Parameter indicates whether to set pipeline UNSTABLE if Quality Gate fails
+    //                 // true = set pipeline to UNSTABLE, false = dont
+    //                 waitForQualityGate abortPipeline: true
+    //             }
+    //         }
+    //     }
     // stage('Build Docker Image'){
     //   steps{
     //   sh 'docker build -t 172.31.36.199:5000/react-app:latest --no-cache . '
@@ -44,7 +44,7 @@ pipeline {
     //   }
     // }
 
-  /*  stage('Performance Tests') {
+    stage('Performance Tests') {
     steps {
      sh "forever start -c 'npm start' ./"
      sh "npm run lighthouse http://172.17.0.2:3000"
@@ -63,7 +63,7 @@ pipeline {
       ])
     }
   }
-}*/
+}
       
   }
 }
