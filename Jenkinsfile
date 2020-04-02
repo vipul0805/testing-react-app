@@ -16,7 +16,7 @@ pipeline {
         steps{
             withAWS(region:'us-east-1',credentials:'awsCreds')
             {
-                s3Upload(bucket:'testing-react-app1', includePathPattern:'/**/*', workingDir:'build');
+                s3Upload(bucket:'testing-react-app1', includePathPattern:'**/*', workingDir:'build');
             }
         }
     }
