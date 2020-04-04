@@ -6,36 +6,66 @@ pipeline {
 	  stage('Testing and Coverage') {
 	    steps {
         sh "npm install"
-        sh "npm run build"
-        //sh "npm install forever -g"
-        //sh "npm install lighthouse -g"
-        //sh "npm run coverage"
+        //sh "npm run build"
+        sh "npm install forever -g"
+        sh "npm install lighthouse -g"
+        sh "npm run coverage"
           }
         }
-        stage('Upload to S3'){
-        steps{
-            withAWS(region:'us-east-1',credentials:'awsCreds')
-            {
-                s3Upload(bucket:'testing-react-app1', includePathPattern:'**/*', workingDir:'build');
+
+         stage("Sonar Analysis"){
+      steps{
+        script {
+                // sonarqube is name of sonarscanner you specified in jenkins tool configuration.
+                scannerhome = tool 'sonarqube';
             }
-        }
+        withSonarQubeEnv('sonar') { 
+          // In withSonarQubeEnv(<name of sonarserver set up in jenkins config>)
+          sh "${scannerhome}/bin/sonar-scanner"
+          }
+      }
     }
-          
+
+  //   stage('Performance Tests') {
+  //   steps {
+  //    sh "forever start -c 'npm start' ./"
+     
+  //    // 172.17.0.3:3000=<ip-of-jenkins-container>:<port>
+  //    sh "npm run lighthouse http://172.17.0.2:3000"
+     
+  //    //sh label: 'Test running', script: '''npx lighthouse-ci http://172.17.0.3:3000/ --jsonReport --report=.'''
+  //    sh "forever stop 0" 
+  //   }
+  //   post {
+  //     always {
+  //       publishHTML (target: [
+  //         allowMissing: false,
+  //         alwaysLinkToLastBuild: false,
+  //         keepAll: true,
+  //         reportDir: '.',
+  //         reportFiles: 'report.html',
+  //         reportName: "Lighthouse"
+  //      ])
+  //     }
+  //  }
+  // }
   }
 }
 
-    // stage("Sonar Analysis"){
-    //   steps{
-    //     script {
-    //             // sonarqube is name of sonarscanner you specified in jenkins tool configuration.
-    //             scannerhome = tool 'sonarqube';
+
+
+
+    //     stage('Upload to S3'){
+    //     steps{
+    //         withAWS(region:'us-east-1',credentials:'awsCreds')
+    //         {
+    //             s3Upload(bucket:'testing-react-app1', includePathPattern:'**/*', workingDir:'build');
     //         }
-    //     withSonarQubeEnv('sonar') { 
-    //       // In withSonarQubeEnv(<name of sonarserver set up in jenkins config>)
-    //       sh "${scannerhome}/bin/sonar-scanner -D sonar.login=admin -D sonar.password=admin"
-    //       }
-    //   }
+    //     }
     // }
+          
+
+   
     // stage("Quality Gate") {
     //         steps {
     //             timeout(time: 1, unit: 'HOURS') {
@@ -57,27 +87,3 @@ pipeline {
     //         '''
     //   }
     // }
-
-//     stage('Performance Tests') {
-//     steps {
-//      sh "forever start -c 'npm start' ./"
-     
-//      // 172.17.0.3:3000=<ip-of-jenkins-container>:<port>
-//      sh "npm run lighthouse http://172.17.0.3:3000"
-     
-//      //sh label: 'Test running', script: '''npx lighthouse-ci http://172.17.0.3:3000/ --jsonReport --report=.'''
-//      sh "forever stop 0" 
-//   }
-//   post {
-//     always {
-//       publishHTML (target: [
-//         allowMissing: false,
-//         alwaysLinkToLastBuild: false,
-//         keepAll: true,
-//         reportDir: '.',
-//         reportFiles: 'report.html',
-//         reportName: "Lighthouse"
-//       ])
-//     }
-//   }
-// }
