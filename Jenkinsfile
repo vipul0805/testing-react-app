@@ -13,18 +13,27 @@ pipeline {
           }
         }
 
-         stage("Sonar Analysis"){
-      steps{
-        script {
-                // sonarqube is name of sonarscanner you specified in jenkins tool configuration.
-                scannerhome = tool 'sonarqube';
+      stage("Sonar Analysis"){
+        steps{
+          script {
+                  // sonarqube is name of sonarscanner you specified in jenkins tool configuration.
+                  scannerhome = tool 'sonarqube';
+              }
+          withSonarQubeEnv('sonar') { 
+            // In withSonarQubeEnv(<name of sonarserver set up in jenkins config>)
+            sh "${scannerhome}/bin/sonar-scanner"
             }
-        withSonarQubeEnv('sonar') { 
-          // In withSonarQubeEnv(<name of sonarserver set up in jenkins config>)
-          sh "${scannerhome}/bin/sonar-scanner"
-          }
+        }
       }
-    }
+       stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = dont
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
 
   //   stage('Performance Tests') {
   //   steps {
@@ -66,15 +75,7 @@ pipeline {
           
 
    
-    // stage("Quality Gate") {
-    //         steps {
-    //             timeout(time: 1, unit: 'HOURS') {
-    //                 // Parameter indicates whether to set pipeline UNSTABLE if Quality Gate fails
-    //                 // true = set pipeline to UNSTABLE, false = dont
-    //                 waitForQualityGate abortPipeline: true
-    //             }
-    //         }
-    //     }
+   
     // stage('Build Docker Image'){
     //   steps{
     //   sh 'docker build -t 172.31.36.199:5000/react-app:latest --no-cache . '
